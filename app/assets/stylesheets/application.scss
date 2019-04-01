@@ -5,9 +5,14 @@
 
   /* @import           "bootstrap.min.css"; */
 
+  $background: #444A4E;
+  $foreground: #FFFFFF;
+
   body {
     padding-top:    20px;
     padding-bottom: 20px;
+    background-color: $background;
+    color:            $foreground;
   }
 
   .inline           { display: inline-block; }

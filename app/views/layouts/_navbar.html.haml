@@ -1,4 +1,4 @@
-.navbar.navbar-expand-lg.navbar-light.bg-light
+.navbar.navbar-expand-lg.navbar-dark.bg-dark
   = link_to content_for?(:title) ? yield(:title) : (ENV['APP_TITLE'] || Rails.application.class.parent_name), root_path, class: "navbar-brand"
 
   %button.navbar-toggler(type="button" data-toggle="collapse" data-target="#NavMain" aria-controls="NavMain" aria-expanded="false" aria-label="Toggle navigation")
