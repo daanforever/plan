@@ -1,0 +1,29 @@
+.navbar.navbar-expand-lg.navbar-light.bg-light
+  = link_to content_for?(:title) ? yield(:title) : (ENV['APP_TITLE'] || Rails.application.class.parent_name), root_path, class: "navbar-brand"
+
+  %button.navbar-toggler(type="button" data-toggle="collapse" data-target="#NavMain" aria-controls="NavMain" aria-expanded="false" aria-label="Toggle navigation")
+    %span.navbar-toggler-icon
+
+  .collapse.navbar-collapse#NavMain
+    - if user_signed_in?
+      %ul.navbar-nav.flex-grow-1
+        %li{ active_if('welcome', 'index') }
+          = link_to t('menu.active', default: 'Active'),  root_path, class: 'nav-link'
+        %li{ active_if('test', 'index') }
+          = link_to t('menu.inactive', default: 'Inactive'),  root_path, class: 'nav-link'
+      %ul.navbar-nav
+        %li.nav-item
+          .navbar-text v:0.1.0
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle#navbarDropdown(href='#' role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+            #{current_user.email}
+          .dropdown-menu(aria-labelledby="navbarDropdown")
+            = link_to t('menu.logout', default: 'Logout'),  destroy_user_session_path, method: :delete, class: 'dropdown-item'
+    - else
+      %ul.navbar-nav.flex-grow-1
+        %li.nav-item
+      %ul.navbar-nav
+        %li.nav-item
+          .navbar-text v:0.1.0
+        %li{ active_if('devise/sessions') }
+          = link_to t('menu.login', default: 'Login'),  new_user_session_path, class: 'nav-link'

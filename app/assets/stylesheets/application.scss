@@ -1,0 +1,58 @@
+  $screen-md:       850px !default;
+  $screen-md-min:   $screen-md !default;
+  $screen-sm:       630px !default;
+  $screen-sm-min:   $screen-sm !default;
+
+  /* @import           "bootstrap.min.css"; */
+
+  body {
+    padding-top:    20px;
+    padding-bottom: 20px;
+  }
+
+  .inline           { display: inline-block; }
+
+  .navbar {
+    margin-bottom:  20px;
+  }
+
+  .form-actions {
+    padding-top: 20px;
+  }
+
+  .badge-error {
+    background-color: #b94a48;
+  }
+  .badge-warning {
+    background-color: #f89406;
+  }
+  .badge-success {
+    background-color: #468847;
+  }
+  .badge-info {
+    background-color: #3a87ad;
+  }
+  .badge-inverse {
+    background-color: #333333;
+  }
+
+ a.navbar-brand.active {
+   color: #f89406;
+ }
+
+ .bordered {
+   border: 1px solid lightgray;
+   border-radius: 3px;
+   margin: -1px;
+ }
+
+ .result {
+   margin-top: 1em;
+   margin-bottom: 1em;
+   min-height: 2.5em;
+   padding: 0.5em;
+ }
+
+ .help-block {
+   padding-left: 1em;
+ }
