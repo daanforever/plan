@@ -13,6 +13,7 @@ module Plan
 
     config.generators do |g|
       g.test_framework :rspec, :views => false, :fixture => true
+      g.integration_tool :rspec
       g.fixture_replacement :factory_bot, :dir => 'spec/factories'
       g.template_engine :haml
       g.view_specs false

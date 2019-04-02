@@ -1,4 +1,4 @@
-class WelcomeCommander < Fie::Commander
+class TasksCommander < Fie::Commander
   pool :say do
     state.message = @published_object
   end

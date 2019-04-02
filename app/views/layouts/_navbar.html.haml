@@ -7,10 +7,8 @@
   .collapse.navbar-collapse#NavMain
     - if user_signed_in?
       %ul.navbar-nav.flex-grow-1
-        %li{ active_if('welcome', 'index') }
-          = link_to t('menu.active', default: 'Active'),  root_path, class: 'nav-link'
-        %li{ active_if('test', 'index') }
-          = link_to t('menu.inactive', default: 'Inactive'),  root_path, class: 'nav-link'
+        -# %li{ active_if('tasks', 'index') }
+        -#   = link_to t('menu.tasks', default: 'Tasks'),  root_path, class: 'nav-link'
       %ul.navbar-nav
         %li.nav-item
           .navbar-text v:0.1.0
