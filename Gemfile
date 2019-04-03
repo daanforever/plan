@@ -46,7 +46,7 @@ gem 'http'                            # A fast Ruby HTTP client
 gem 'faker'                           # A library for generating fake data
 
 gem 'devise'                          # Flexible authentication solution for Rails with Warden
-gem 'fie'                             # Frontend framework running over a WebSocket connection
+# gem 'fie'                             # Frontend framework running over a WebSocket connection
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

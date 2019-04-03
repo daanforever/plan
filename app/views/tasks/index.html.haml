@@ -1,21 +1,12 @@
-%h1 Listing tasks
 
-%table
-  %thead
-    %tr
-      %th Content
-      %th
-      %th
-      %th
+= simple_form_for(Task.new, html: {class: 'form-inline'}) do |f|
+  .form-group.m-2.col-md-9
+    = f.input_field :content,
+                    class: 'form-control',
+                    placeholder: t(:new_task, default: 'New task'),
+                    remote: true
+  = f.button :submit, class: 'col-md-2 btn-primary'
 
-  %tbody
-    - @tasks.each do |task|
-      %tr
-        %td= task.content
-        %td= link_to 'Show', task
-        %td= link_to 'Edit', edit_task_path(task)
-        %td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Task', new_task_path
+- @tasks.each do |task|
+  .task{id: task.id}
+    %p=task.content
