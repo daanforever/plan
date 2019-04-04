@@ -1,12 +1,17 @@
+= simple_form_for(Task.new) do |f|
+  .form-row
+    .input-group.mb-3
+      = f.input_field :content,
+                      class: 'form-control',
+                      placeholder: t(:new_task, default: 'New task'),
+                      remote: true
+      .input-group-append
+        = f.button :submit, class: 'btn-primary'
 
-= simple_form_for(Task.new, html: {class: 'form-inline'}) do |f|
-  .form-group.m-2.col-md-9
-    = f.input_field :content,
-                    class: 'form-control',
-                    placeholder: t(:new_task, default: 'New task'),
-                    remote: true
-  = f.button :submit, class: 'col-md-2 btn-primary'
-
-- @tasks.each do |task|
-  .task{id: task.id}
-    %p=task.content
+.tasks.sortable
+  - @tasks.each do |task|
+    .task{id: task.id}
+      %p
+        %a.btn.btn-sm.btn-outline-secondary.lurk
+          @
+        %span= task.content
