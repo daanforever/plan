@@ -1,0 +1,27 @@
+!!!
+%html{lang: 'en'}
+  %head
+    %title= content_for?(:title) ? yield(:title) : (ENV['APP_TITLE'] || Rails.application.class.parent_name)
+    %meta{charset: 'utf-8'}
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
+    %meta{content: 'width=device-width, initial-scale=1, shrink-to-fit=no', name: 'viewport'}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag controller_path, media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'turbolinks', 'data-turbolinks-track' => 'reload'
+    = csrf_meta_tags
+  %body
+    .container-fluid
+      = render 'layouts/navbar'
+    = yield :header
+    .container{style: 'height: 4em;'}
+      = render 'layouts/messages'
+    .container
+      - if controller.class.parent == Devise
+        = yield
+      - else
+        = render template: 'layouts/fie'
+    %script{src: "https://code.jquery.com/jquery-3.3.1.slim.min.js", integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", crossorigin: "anonymous"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js", integrity: "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1", crossorigin: "anonymous"}
+    %script{src: "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js", integrity: "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM", crossorigin: "anonymous"}
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag controller_path, 'data-turbolinks-track' => 'reload'

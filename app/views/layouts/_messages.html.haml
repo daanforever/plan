@@ -1,0 +1,15 @@
+- trans = Hash.new('info').merge({notice: 'success', alert: 'danger'})
+- flash.each do |type, message|
+  - if message.is_a?(String)
+    .alert.alert-dismissible{class: "alert-#{ trans[type.to_sym] }" }
+      %button.close{ data: { dismiss: "alert" } }
+        %span{:'aria-hidden' => true} &times;
+        %span.sr-only Close
+      = message
+  - elsif message.is_a?(ActiveModel::Errors)
+    .alert.alert-dismissible.alert-danger
+      %button.close{ data: { dismiss: "alert" } }
+        %span{:'aria-hidden' => true} &times;
+        %span.sr-only Close
+      - message.full_messages.each do |msg|
+        %p= msg
