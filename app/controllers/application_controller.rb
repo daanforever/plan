@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   private
     def update_cookie
-      cookies.encrypted[:user_id] = user_signed_in? ? current_user.id : nil
+      if user_signed_in?
+        cookies.encrypted[:user_id] = current_user.id
+      end
     end
 end

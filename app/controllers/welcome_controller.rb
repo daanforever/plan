@@ -2,6 +2,6 @@ class WelcomeController < ApplicationController
   include Fie::Manipulator
   def index
     @settings = Settings.all
-    console
+    console if Rails.env.development?
   end
 end
