@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/daanforever/plan.svg?branch=development)](https://travis-ci.org/daanforever/plan)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
