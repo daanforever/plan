@@ -1,7 +1,11 @@
 language: ruby
 
 sudo: false
-#cache: bundler
+cache: bundler
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=6e0a97ce27d1b1092b961be8536106301ba5efcb2fdd6bb3857a0ed32526ef9c
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -15,7 +19,3 @@ after_script:
 
 rvm:
   - 2.6
-
-nv:
-  global:
-    - CC_TEST_REPORTER_ID=6e0a97ce27d1b1092b961be8536106301ba5efcb2fdd6bb3857a0ed32526ef9c
