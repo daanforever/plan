@@ -1,9 +1,11 @@
 class WelcomeCommander < Fie::Commander
-  pool :notification do
-    execute_js_function("console.log", @published_object)
+  def subscribed
+    super
+    redis.rpush "user_#{current_user.id}", params[:identifier]
   end
 
-  def uuid
-    @connection_uuid
+  def unsubscribed
+    super
+    redis.lrem("user_#{current_user.id}", 0, params[:identifier])
   end
 end
