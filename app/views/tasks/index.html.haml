@@ -1,0 +1,17 @@
+= simple_form_for(Task.new, remote: true) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    .input-group
+      = f.input_field :title, class: 'col-md'
+      .input-group-append
+        = f.button :submit, '▷', class: 'btn btn-secondary'
+
+%br
+
+%table.table.table-borderless.table-hover.tasks.sortable
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td= task.title

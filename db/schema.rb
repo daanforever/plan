@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_121003) do
+ActiveRecord::Schema.define(version: 2019_07_03_074622) do
 
   create_table "settings", force: :cascade do |t|
     t.string "key"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2019_06_14_121003) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_settings_on_key", unique: true
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.integer "assignee_id"
+    t.string "assignee_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -17,4 +17,5 @@ Rails.application.config.assets.precompile += %w(
   turbolinks.js
   devise/*
   welcome.*
+  tasks.*
 )

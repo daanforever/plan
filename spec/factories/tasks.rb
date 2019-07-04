@@ -1,14 +1,17 @@
 # == Schema Information
 #
-# Table name: settings
+# Table name: tasks
 #
 #  id         :integer          not null, primary key
-#  key        :string
-#  value      :text
+#  title      :string
+#  owner_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Settings < ApplicationRecord
-	include Settingson::Base
+FactoryBot.define do
+  factory :task do
+    title { "MyString" }
+    owner { nil }
+  end
 end
