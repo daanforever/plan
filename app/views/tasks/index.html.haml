@@ -10,8 +10,6 @@
 
 %br
 
-%table.table.table-borderless.table-hover.tasks.sortable
-  %tbody
-    - @tasks.each do |task|
-      %tr
-        %td= task.title
+%ul.list-group.list-group-flush.sortable
+  - @tasks.each do |task|
+    %li.list-group-item= task.title

@@ -3,7 +3,8 @@
   $screen-sm:       630px !default;
   $screen-sm-min:   $screen-sm !default;
 
-  @import           "bootstrap.min.css";
+  @import           "_variables";
+  @import           "bootstrap";
 
   body {
     padding-top:    20px;
@@ -55,4 +56,24 @@
 
  .help-block {
    padding-left: 1em;
+ }
+
+
+ body.dragging, body.dragging * {
+   cursor: move !important;
+ }
+
+ .dragged {
+   position: absolute;
+   opacity: 0.9;
+   z-index: 1000;
+ }
+
+ .sortable li.placeholder {
+   position: relative;
+   /** More li styles **/
+ }
+ .sortable li.placeholder:before {
+   position: absolute;
+   /** Define arrowhead **/
  }

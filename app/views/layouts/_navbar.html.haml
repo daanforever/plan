@@ -1,5 +1,5 @@
 .navbar.navbar-expand-lg.navbar-dark.bg-dark
-  = link_to content_for?(:title) ? yield(:title) : (ENV['APP_TITLE'] || Rails.application.class.parent_name), root_path, class: "navbar-brand"
+  = link_to content_for?(:title) ? yield(:title) : (ENV['APP_TITLE'] || '❖'), root_path, class: "navbar-brand"
 
   %button.navbar-toggler(type="button" data-toggle="collapse" data-target="#NavMain" aria-controls="NavMain" aria-expanded="false" aria-label="Toggle navigation")
     %span.navbar-toggler-icon
@@ -7,8 +7,8 @@
   .collapse.navbar-collapse#NavMain
     - if user_signed_in?
       %ul.navbar-nav.flex-grow-1
-        -# %li{ active_if('tasks', 'index') }
-        -#   = link_to t('menu.tasks', default: 'Tasks'),  root_path, class: 'nav-link'
+        %li{ active_if('tasks', 'index') }
+          = link_to t('menu.tasks', default: 'Tasks'),  tasks_path, class: 'nav-link'
       %ul.navbar-nav
         %li.nav-item
           .navbar-text v:0.1.0

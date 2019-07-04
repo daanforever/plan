@@ -47,6 +47,7 @@ gem 'faker'                           # A library for generating fake data
 
 gem 'devise'                          # Flexible authentication solution for Rails with Warden
 gem 'fie'                             # Frontend framework running over a WebSocket connection
+gem 'bootstrap', '~> 4.3.1'           # Bootstrap 4 rubygem for Rails
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
