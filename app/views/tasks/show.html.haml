@@ -1,12 +1,16 @@
-%p#notice= notice
+= simple_form_for(Task.new, remote: true) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-%p
-  %b Title:
-  = @task.title
-%p
-  %b Owner:
-  = @task.owner
+  .form-inputs
+    .input-group
+      = f.input_field :title, class: 'col-sm'
+      .input-group-append
+        = f.button :submit, '▷', class: 'btn btn-secondary'
 
-= link_to 'Edit', edit_task_path(@task)
-\|
-= link_to 'Back', tasks_path
+%br
+
+%ul.list-group.list-group-flush.sortable.tasks
+  - @tasks.each do |task|
+    %li.list-group-item{'data-id': task.id, 'data-position': task.position}
+      = task.title

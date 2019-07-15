@@ -1,15 +1,17 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  # before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @tasks = current_user.tasks_accessible
   end
 
   # GET /tasks/new
@@ -28,10 +30,9 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        # Plan::Com.new.update(current_user, 'tasks', current_user.tasks_accessible)
+        format.json { render :show, status: :created }
       else
-        format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -41,11 +42,12 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+      Rails.logger.debug(params)
+      new_order = JSON.parse(params.require(:order))
+      Rails.logger.debug(new_order)
+      if Meta.reorder(user_id: current_user.id, order: new_order)
+        format.json { render :index, status: :ok }
       else
-        format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +71,8 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :owner_id)
+      params.require(:task)
+            .permit(:title)
+            .merge(user_id: current_user.id)
     end
 end

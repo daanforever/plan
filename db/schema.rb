@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_03_074622) do
+ActiveRecord::Schema.define(version: 2019_07_10_072000) do
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups_users", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
+  end
+
+  create_table "meta", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_meta_on_task_id"
+    t.index ["user_id"], name: "index_meta_on_user_id"
+  end
 
   create_table "settings", force: :cascade do |t|
     t.string "key"
@@ -22,12 +47,12 @@ ActiveRecord::Schema.define(version: 2019_07_03_074622) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
-    t.integer "owner_id"
-    t.string "owner_type"
+    t.integer "user_id"
     t.integer "assignee_id"
     t.string "assignee_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

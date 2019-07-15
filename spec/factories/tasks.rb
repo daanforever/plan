@@ -2,11 +2,13 @@
 #
 # Table name: tasks
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  owner_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  title         :string
+#  user_id       :integer
+#  assignee_id   :integer
+#  assignee_type :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 FactoryBot.define do

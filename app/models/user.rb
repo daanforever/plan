@@ -15,9 +15,21 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :registerable, :recoverable, :validatable
   devise :database_authenticatable, :rememberable
-  #  :registerable, :recoverable, :validatable
 
-  has_many :tasks_owned, class_name: 'Task', as: :owner
-  has_many :tasks_assigned, class_name: 'Task',  as: :assignee
+  has_and_belongs_to_many :groups
+  has_many :tasks
+  # has_many :tasks_assigned, as: :assignee
+  has_many :meta, class_name: 'Meta', through: :tasks
+
+  def tasks_accessible
+    self.tasks
+      .or(Task.where(assignee: self))
+      .or(Task.where(assignee: self.groups))
+      .left_outer_joins(:meta)
+      .where('meta.user_id = ?', self.id)
+      .order('meta.position': :desc)
+      .select('tasks.*, meta.position')
+  end
 end
