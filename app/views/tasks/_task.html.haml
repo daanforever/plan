@@ -1,0 +1,5 @@
+%li.list-group-item{'data-id': task.id, 'data-position': task.position}
+  = link_to '✓', task, remote: true, class: 'btn-done', method: 'delete'
+  = link_to '☰', '', remote: true, class: 'btn-more'
+  &nbsp;
+  = task.title

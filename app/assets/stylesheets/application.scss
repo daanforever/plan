@@ -77,3 +77,18 @@
    position: absolute;
    /** Define arrowhead **/
  }
+
+a.btn-done, a.btn-more {
+  color: #DDDDDD;
+  font-size: 1.5em;
+}
+
+a:hover.btn-done {
+  color: #33CC44;
+  text-decoration: none;
+}
+
+a:hover.btn-more {
+  color: #77AAFF;
+  text-decoration: none;
+}

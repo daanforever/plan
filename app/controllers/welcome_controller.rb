@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @settings = Settings.all
-    console if Rails.env.development?
+    redirect_to tasks_path if user_signed_in?
   end
 end

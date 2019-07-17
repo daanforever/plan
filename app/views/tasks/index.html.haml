@@ -11,6 +11,4 @@
 %br
 
 %ul.list-group.list-group-flush.sortable.tasks
-  - @tasks.each do |task|
-    %li.list-group-item{'data-id': task.id, 'data-position': task.position}
-      = task.title
+  = render @tasks

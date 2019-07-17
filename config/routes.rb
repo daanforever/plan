@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resource :tasks
+  # resource :tasks
+  resources :tasks, except: [ :new ]
+  patch '/tasks', to: 'tasks#reorder'
   root to: 'welcome#index'
   devise_for :users
   get 'welcome/index'

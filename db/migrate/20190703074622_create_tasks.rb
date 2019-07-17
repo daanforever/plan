@@ -2,7 +2,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
   def change
     create_table :tasks do |t|
       t.string :title
-      t.references :user
+      t.references :owner
       t.integer :assignee_id
       t.string :assignee_type
 

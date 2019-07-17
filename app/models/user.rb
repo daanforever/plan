@@ -19,17 +19,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable
 
   has_and_belongs_to_many :groups
-  has_many :tasks
-  # has_many :tasks_assigned, as: :assignee
-  has_many :meta, class_name: 'Meta', through: :tasks
+  has_many :tasks_owned,    class_name: 'Task', foreign_key: 'owner_id'
+  has_many :tasks_assigned, class_name: 'Task', foreign_key: 'assignee_id'
+  # has_many :meta, class_name: 'Meta', through: :tasks
 
-  def tasks_accessible
-    self.tasks
-      .or(Task.where(assignee: self))
-      .or(Task.where(assignee: self.groups))
+  def tasks
+    self.tasks_owned.actual.or(self.tasks_assigned.actual)
       .left_outer_joins(:meta)
-      .where('meta.user_id = ?', self.id)
-      .order('meta.position': :desc)
+      .order(position: :desc)
       .select('tasks.*, meta.position')
+      # .where('meta.user_id = ?', self.id)
   end
 end

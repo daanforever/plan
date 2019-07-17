@@ -31,10 +31,7 @@ $ ->
     [data, status, xhr] = event.detail
     item = $.parseJSON(xhr.responseText)
     console.log(item)
-    $('ul.tasks').prepend(
-      "<li class=\"list-group-item\" data-id=\"#{item.id}\" " +
-      "data-position=\"#{item.id}\">#{item.title}</li>"
-    )
+    $('ul.tasks').prepend(item.html)
     $('#task_title').val('')
   ).on "ajax:error", (event) ->
     console.log('ERROR')

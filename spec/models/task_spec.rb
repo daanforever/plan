@@ -9,6 +9,7 @@
 #  assignee_type :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  state         :integer          default(0)
 #
 
 require 'rails_helper'

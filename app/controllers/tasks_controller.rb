@@ -1,17 +1,16 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-
+    @tasks = current_user.tasks
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @tasks = current_user.tasks_accessible
   end
 
   # GET /tasks/new
@@ -42,6 +41,18 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
+      if Meta.update(task_params)
+        format.json { render :show, status: :ok }
+      else
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /tasks
+  # PATCH/PUT /tasks.json
+  def reorder
+    respond_to do |format|
       Rails.logger.debug(params)
       new_order = JSON.parse(params.require(:order))
       Rails.logger.debug(new_order)
@@ -56,10 +67,12 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+      if @task.done!
+        format.json { head :no_content, status: :ok }
+      else
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -73,6 +86,6 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task)
             .permit(:title)
-            .merge(user_id: current_user.id)
+            .merge(owner_id: current_user.id)
     end
 end
