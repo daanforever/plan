@@ -1,11 +1,11 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :restore]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.actual
   end
 
   # GET /tasks/1
@@ -64,6 +64,17 @@ class TasksController < ApplicationController
     end
   end
 
+  # PATCH/PUT /tasks/1/restore.json
+  def restore
+    respond_to do |format|
+      if @task.plan!
+        format.json { head :no_content, status: :ok }
+      else
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
@@ -74,6 +85,12 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /archive
+  # GET /archive.json
+  def archive
+    @tasks = current_user.tasks.archive
   end
 
   private

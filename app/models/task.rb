@@ -18,14 +18,8 @@ class Task < ApplicationRecord
   # has_one :position, through: :meta
   has_many :meta, class_name: 'Meta', dependent: :destroy
 
-  STATES = {
-    0 => 'plan',
-    1 => 'done',
-    2 => 'work',
-    3 => 'wait',
-  }
-
   scope :actual, -> { where(state: [0, 2, 3]) }
+  scope :archive, -> { where(state: 1) }
 
   before_validation do
     self.assignee = self.owner unless self.assignee.present?
@@ -36,7 +30,12 @@ class Task < ApplicationRecord
     self.meta.create!(user: self.owner, position: self.id)
   end
 
-  STATES.each do |k, v|
+  STATES = {
+    0 => 'plan',
+    1 => 'done',
+    2 => 'work',
+    3 => 'wait',
+  }.each do |k, v|
     define_method("#{v}!".to_sym) do
       self.update(state: k)
     end
@@ -44,6 +43,6 @@ class Task < ApplicationRecord
 
   # Use only for owner
   def position
-    self.meta.find_by(user: self.owner)
+    self.meta.find_by(user: self.owner).position
   end
 end

@@ -71,6 +71,8 @@
 
  .sortable li.placeholder {
    position: relative;
+   width: 50%;
+
    /** More li styles **/
  }
  .sortable li.placeholder:before {
@@ -78,17 +80,24 @@
    /** Define arrowhead **/
  }
 
-a.btn-done, a.btn-more {
+a.btn-done, a.btn-more, a.btn-restore {
   color: #DDDDDD;
-  font-size: 1.5em;
+  font-size: 1em;
+  text-decoration: none;
 }
 
 a:hover.btn-done {
   color: #33CC44;
-  text-decoration: none;
 }
 
 a:hover.btn-more {
   color: #77AAFF;
-  text-decoration: none;
+}
+
+a:hover.btn-restore {
+  color: #FFFF11;
+}
+
+table tr td.icons {
+  width: 3.5em;
 }

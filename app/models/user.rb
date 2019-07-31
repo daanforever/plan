@@ -24,7 +24,7 @@ class User < ApplicationRecord
   # has_many :meta, class_name: 'Meta', through: :tasks
 
   def tasks
-    self.tasks_owned.actual.or(self.tasks_assigned.actual)
+    self.tasks_owned.or(self.tasks_assigned)
       .left_outer_joins(:meta)
       .order(position: :desc)
       .select('tasks.*, meta.position')

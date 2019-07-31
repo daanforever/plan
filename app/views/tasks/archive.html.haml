@@ -1,0 +1,10 @@
+= render partial: 'form'
+
+%br
+
+- @tasks.each do |task|
+  %ul.list-group.list-group-flush.sortable.tasks
+    %li.list-group-item{'data-id': task.id, 'data-position': task.position}
+      = link_to '↻', restore_task_path(task.id), remote: true, class: 'btn-restore', method: 'patch'
+      &nbsp;
+      = task.title

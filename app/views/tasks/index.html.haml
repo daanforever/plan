@@ -1,12 +1,4 @@
-= simple_form_for(Task.new, remote: true) do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
-  .form-inputs
-    .input-group
-      = f.input_field :title, class: 'col-sm'
-      .input-group-append
-        = f.button :submit, '▷', class: 'btn btn-secondary'
+= render partial: 'form'
 
 %br
 

@@ -6,9 +6,12 @@
 
   .collapse.navbar-collapse#NavMain
     - if user_signed_in?
-      %ul.navbar-nav.flex-grow-1
+      %ul.navbar-nav
         %li{ active_if('tasks', 'index') }
           = link_to t('menu.tasks', default: 'Tasks'),  tasks_path, class: 'nav-link'
+      %ul.navbar-nav.flex-grow-1
+        %li{ active_if('tasks', 'archive') }
+          = link_to t('menu.archive', default: 'Archive'),  tasks_archive_path, class: 'nav-link'
       %ul.navbar-nav
         %li.nav-item
           .navbar-text v:0.1.0
