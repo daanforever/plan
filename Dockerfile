@@ -20,11 +20,6 @@ ENV BUNDLE_JOBS=4 \
 
 ADD Gemfile* /application/
 
-RUN mkdir -p ~/.ssh && \
-    echo 'StrictHostKeyChecking no' >> ~/.ssh/config && \
-    mv id_rsa ~/.ssh && \
-    chmod -R og-rwx ~/.ssh
-
 RUN bundle install --frozen
 
 ADD . /application
