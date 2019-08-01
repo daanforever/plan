@@ -8,6 +8,12 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks.actual
   end
 
+  # GET /archive
+  # GET /archive.json
+  def archive
+    @tasks = current_user.tasks.archive
+  end
+
   # GET /tasks/1
   # GET /tasks/1.json
   def show
@@ -85,12 +91,6 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # GET /archive
-  # GET /archive.json
-  def archive
-    @tasks = current_user.tasks.archive
   end
 
   private

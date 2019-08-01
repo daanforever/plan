@@ -1,0 +1,20 @@
+- @tasks.each do |task|
+  %tr{'data-id': task.id, 'data-position': task.position}
+    %td.icons
+      .btn-group
+        - unless archived
+          = link_to task, remote: true, class: 'btn btn-primary btn-sm btn-done', method: 'delete' do
+            %span.octicon= octicon 'check'
+        - else
+          = link_to restore_task_path(task.id), remote: true, class: 'btn btn-secondary btn-sm btn-restore', method: 'patch' do
+            %span.octicon= octicon 'reply'
+        .btn-group
+          .dropdown
+            %a#dropdownMenuLink.btn.btn-secondary.btn-sm.dropdown-toggle(data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false')
+              %span.octicon= octicon 'grabber'
+            .dropdown-menu(aria-labelledby="dropdownMenuLink")
+              = link_to 'wait', '#', class: 'dropdown-item'
+    -# %td= task.id
+    -# %td= task.position
+    %td.align-middle
+      = task.title

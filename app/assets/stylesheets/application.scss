@@ -69,35 +69,31 @@
    z-index: 1000;
  }
 
- .sortable li.placeholder {
-   position: relative;
-   width: 50%;
-
-   /** More li styles **/
- }
- .sortable li.placeholder:before {
-   position: absolute;
-   /** Define arrowhead **/
- }
-
-a.btn-done, a.btn-more, a.btn-restore {
-  color: #DDDDDD;
-  font-size: 1em;
-  text-decoration: none;
+td.icons {
+  width: 7em;
 }
 
-a:hover.btn-done {
-  color: #33CC44;
+svg {
+  fill: $white;
 }
 
-a:hover.btn-more {
-  color: #77AAFF;
-}
+// a.btn-done, a.btn-more, a.btn-restore {
+//   color: #DDDDDD;
+//   text-decoration: none;
+// }
+//
+// a:hover.btn-done {
+//   color: #33CC44;
+// }
+//
+// a:hover.btn-more {
+//   color: #77AAFF;
+// }
+//
+// a:hover.btn-restore {
+//   color: #FFFF11;
+// }
 
-a:hover.btn-restore {
-  color: #FFFF11;
-}
-
-table tr td.icons {
-  width: 3.5em;
-}
+// table tr td.icons {
+//   width: 3.5em;
+// }

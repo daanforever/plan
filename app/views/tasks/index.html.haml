@@ -2,5 +2,6 @@
 
 %br
 
-%ul.list-group.list-group-flush.sortable.tasks
-  = render @tasks
+%table.table.sortable
+  %tbody
+    = render partial: 'tasks', locals: { archived: false }

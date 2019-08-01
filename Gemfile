@@ -47,6 +47,7 @@ gem 'faker'                           # A library for generating fake data
 
 gem 'devise'                          # Flexible authentication solution for Rails with Warden
 gem 'bootstrap', '~> 4.3.1'           # Bootstrap 4 rubygem for Rails
+gem 'octicons_helper'                 # Octicons rails helper
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

@@ -3,7 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 start = ->
   group = $( ".sortable" ).sortable({
-    placeholder: '<li class="list-group-item">&nbsp;</li>',
+    containerSelector: 'table',
+    itemPath: '> tbody',
+    itemSelector: 'tr',
+    placeholder: '<tr class="placeholder"><td>&gt;</td><td></td></tr>',
+
     onDrop: ($item, container, _super) ->
       data = group.sortable("serialize").get()
       jsonString = JSON.stringify(data[0])
@@ -27,26 +31,23 @@ start = ->
       _super($item, container)
   });
 
-  $(document).on('ajax:success', '#new_task', (event) ->
+  $('#new_task').on('ajax:success', (event) ->
     [data, status, xhr] = event.detail
     item = $.parseJSON(xhr.responseText)
     $('ul.tasks').prepend(item.html)
     $('#task_title').val('')
   ).on "ajax:error", '#new_task', (event) ->
-    console.log('ERROR create new task')
+    console.log('ERROR: create task')
 
-  $(document).on('ajax:success', 'a.btn-done', (event) ->
-    $(this).parent().remove()
+  $('a.btn-done').on('ajax:success', (event) ->
+    $(this).parents('tr').remove()
   ).on "ajax:error", 'a.btn-done', (event) ->
-    console.log('ERROR to mark a task as completed')
+    console.log('ERROR: mark done')
 
-  $(document).on('ajax:success', 'a.btn-restore', (event) ->
-    $(this).parent().remove()
+  $('a.btn-restore').on('ajax:success', (event) ->
+    $(this).parents('tr').remove()
   ).on "ajax:error", (event) ->
-    console.log('ERROR to restore task')
-
-$(document).ready ->
-  start()
+    console.log('ERROR: restore task')
 
 $(document).on('turbolinks:load', ->
   start()
