@@ -14,6 +14,7 @@ RUN apt update && \
 FROM ruby:2.6.3 AS build
 WORKDIR /application
 
+ARG RAILS_MASTER_KEY
 ENV BUNDLE_JOBS=4 \
     RAILS_ENV=production \
     RAILS_SERVE_STATIC_FILES=yes
